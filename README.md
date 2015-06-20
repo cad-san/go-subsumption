@@ -1,4 +1,7 @@
 # go-subsumption
+
+[![Build Status](https://travis-ci.org/cad-san/go-subsumption.svg?branch=master)](https://travis-ci.org/cad-san/go-subsumption)
+
 Implementation of "Subsumption Architecture" with Golang
 
 ##Overview
