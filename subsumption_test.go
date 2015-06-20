@@ -63,6 +63,31 @@ func TestPerform(t *testing.T) {
 	}
 }
 
+func TestPerformMulti(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	first := NewMockBehavior(ctrl)
+	first.EXPECT().Sense().Return(false, nil)
+
+	second := NewMockBehavior(ctrl)
+	second.EXPECT().Sense().Return(true, nil)
+	second.EXPECT().Perform().Return(true, nil)
+
+	agent := Agent{}
+	agent.AddBehavior(first)
+	agent.AddBehavior(second)
+
+	ret, err := agent.Perform()
+
+	if err != nil {
+		t.Errorf("agent.Perform() failed with : %v", err)
+	}
+	if ret != true {
+		t.Errorf("agent.Perform() should be false because [second] behabior is active")
+	}
+}
+
 func TestSenceError(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
