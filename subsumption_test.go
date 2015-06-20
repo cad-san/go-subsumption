@@ -40,3 +40,24 @@ func TestInit(t *testing.T) {
 
 	agent.Init()
 }
+
+func TestPerform(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	behabior := NewMockBehavior(ctrl)
+	behabior.EXPECT().Sense().Return(true, nil)
+	behabior.EXPECT().Perform().Return(true, nil)
+
+	agent := Agent{}
+	agent.AddBehavior(behabior)
+
+	ret, err := agent.Perform()
+
+	if err != nil {
+		t.Errorf("unexpected agent.Perform() fail with : %v", err)
+	}
+	if ret != true {
+		t.Errorf("agent.Perform() should be true because behabior is active")
+	}
+}
