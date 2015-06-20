@@ -36,15 +36,15 @@ func (_mr *_MockBehaviorRecorder) Init() *gomock.Call {
 	return _mr.mock.ctrl.RecordCall(_mr.mock, "Init")
 }
 
-func (_m *MockBehavior) Sence() (bool, error) {
-	ret := _m.ctrl.Call(_m, "Sence")
+func (_m *MockBehavior) Sense() (bool, error) {
+	ret := _m.ctrl.Call(_m, "Sense")
 	ret0, _ := ret[0].(bool)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-func (_mr *_MockBehaviorRecorder) Sence() *gomock.Call {
-	return _mr.mock.ctrl.RecordCall(_mr.mock, "Sence")
+func (_mr *_MockBehaviorRecorder) Sense() *gomock.Call {
+	return _mr.mock.ctrl.RecordCall(_mr.mock, "Sense")
 }
 
 func (_m *MockBehavior) Perform() (bool, error) {

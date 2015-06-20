@@ -6,7 +6,7 @@ type Agent struct {
 
 type Behavior interface {
 	Init()
-	Sence() (bool, error)
+	Sense() (bool, error)
 	Perform() (bool, error)
 }
 
