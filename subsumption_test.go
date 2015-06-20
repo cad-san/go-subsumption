@@ -2,6 +2,7 @@ package subsumption_test
 
 import (
 	. "."
+	"errors"
 	gomock "github.com/golang/mock/gomock"
 	"testing"
 )
@@ -59,5 +60,25 @@ func TestPerform(t *testing.T) {
 	}
 	if ret != true {
 		t.Errorf("agent.Perform() should be true because behabior is active")
+	}
+}
+
+func TestSenceError(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	behabior := NewMockBehavior(ctrl)
+	behabior.EXPECT().Sense().Return(false, errors.New("unknown error"))
+
+	agent := Agent{}
+	agent.AddBehavior(behabior)
+
+	ret, err := agent.Perform()
+
+	if err != nil {
+		t.Errorf("unexpected agent.Perform() fail with : %v", err)
+	}
+	if ret != false {
+		t.Errorf("agent.Perform() should be false because no behavior is active")
 	}
 }
