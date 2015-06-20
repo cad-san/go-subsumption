@@ -10,6 +10,10 @@ type Behavior interface {
 	Perform() (bool, error)
 }
 
+func (self *Agent) AddBehavior(new_behavior Behavior) {
+	self.behaviors = append(self.behaviors, new_behavior)
+}
+
 func (self Agent) Size() int {
 	return len(self.behaviors)
 }
