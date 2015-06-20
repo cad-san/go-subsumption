@@ -107,3 +107,27 @@ func TestSenceError(t *testing.T) {
 		t.Errorf("agent.Perform() should be false because no behavior is active")
 	}
 }
+
+func TestPerformNoActive(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	first := NewMockBehavior(ctrl)
+	first.EXPECT().Sense().Return(false, nil)
+
+	second := NewMockBehavior(ctrl)
+	second.EXPECT().Sense().Return(false, nil)
+
+	agent := Agent{}
+	agent.AddBehavior(first)
+	agent.AddBehavior(second)
+
+	ret, err := agent.Perform()
+
+	if err != nil {
+		t.Errorf("agent.Perform() failed with : %v", err)
+	}
+	if ret != false {
+		t.Errorf("agent.Perform() should be false because no behavior is active")
+	}
+}
