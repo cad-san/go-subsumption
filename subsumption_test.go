@@ -27,3 +27,16 @@ func TestAddBehavior(t *testing.T) {
 		t.Errorf("agent.Size() should be 1")
 	}
 }
+
+func TestInit(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	behabior := NewMockBehavior(ctrl)
+	behabior.EXPECT().Init()
+
+	agent := Agent{}
+	agent.AddBehavior(behabior)
+
+	agent.Init()
+}

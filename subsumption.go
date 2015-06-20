@@ -10,6 +10,12 @@ type Behavior interface {
 	Perform() (bool, error)
 }
 
+func (self *Agent) Init() {
+	for _, b := range self.behaviors {
+		b.Init()
+	}
+}
+
 func (self *Agent) AddBehavior(new_behavior Behavior) {
 	self.behaviors = append(self.behaviors, new_behavior)
 }
