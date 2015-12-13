@@ -1,8 +1,8 @@
 package subsumption_test
 
 import (
-	. "."
 	"errors"
+	. "github.com/cad-san/go-subsumption"
 	gomock "github.com/golang/mock/gomock"
 	"testing"
 )
