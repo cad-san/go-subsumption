@@ -2,5 +2,10 @@ language: go
 go:
   - tip
 
+install:
+  - go get github.com/axw/gocov/gocov
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/mattn/goveralls
+
 script:
-  - go test -v
+  - $HOME/gopath/bin/goveralls
